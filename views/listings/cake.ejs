@@ -1,0 +1,291 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+
+<body>
+<div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="cookieGallery">
+        <!-- Images will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+<script>
+    // Array of cookie listings
+    // Array of cake listings
+const allListings = [
+    { 
+        image: "https://i.imgur.com/yTduCKH.jpg", 
+        title: "Chocolate Cake", 
+        price: 20, 
+        category: "Chocolate Cake", 
+        flavor: "Rich chocolate flavor with layers of chocolate frosting.",
+        description: "Indulge in the richness of chocolate with our decadent chocolate cake. Perfect for any chocolate lover's celebration.",
+    },
+    { 
+        image: "https://i.imgur.com/Gx0Xq8b.jpg", 
+        title: "Vanilla Cake", 
+        price: 18, 
+        category: "Vanilla Cake", 
+        flavor: "Classic vanilla taste with creamy vanilla frosting.",
+        description: "Enjoy the timeless flavor of vanilla with our fluffy vanilla cake. Delightfully sweet and perfect for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/5cGRsIR.jpg", 
+        title: "Red Velvet Cake", 
+        price: 22, 
+        category: "Red Velvet Cake", 
+        flavor: "Subtle cocoa flavor with cream cheese frosting.",
+        description: "Experience the luxury of our red velvet cake, characterized by its velvety texture and signature red color. Paired with creamy cream cheese frosting, it's a true delight.",
+    },
+    { 
+        image: "https://i.imgur.com/vXU0gFp.jpg", 
+        title: "Carrot Cake", 
+        price: 25, 
+        category: "Carrot Cake", 
+        flavor: "Moist cake with grated carrots and cream cheese frosting.",
+        description: "Savor the warmth and spice of our carrot cake, made with freshly grated carrots and a creamy layer of cream cheese frosting. A delightful treat for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/qnRPo9O.jpg", 
+        title: "Lemon Cake", 
+        price: 21, 
+        category: "Lemon Cake", 
+        flavor: "Zesty lemon flavor with tangy lemon frosting.",
+        description: "Refresh your palate with our tangy lemon cake, bursting with zesty lemon flavor and topped with a tangy lemon frosting. Perfect for summer celebrations.",
+    },
+    { 
+        image: "https://i.imgur.com/0Z7kTJu.jpg", 
+        title: "Coconut Cake", 
+        price: 24, 
+        category: "Coconut Cake", 
+        flavor: "Coconut-infused cake with coconut cream frosting.",
+        description: "Escape to the tropics with our coconut cake, featuring a moist coconut-infused cake and a luscious coconut cream frosting. A taste of paradise in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/QNz8C9T.jpg", 
+        title: "Strawberry Shortcake", 
+        price: 23, 
+        category: "Strawberry Shortcake", 
+        flavor: "Light cake layers with fresh strawberries and whipped cream.",
+        description: "Indulge in the sweetness of summer with our strawberry shortcake, featuring light cake layers, fresh strawberries, and airy whipped cream. A classic dessert for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/ZyX6sLy.jpg", 
+        title: "Black Forest Cake", 
+        price: 26, 
+        category: "Black Forest Cake", 
+        flavor: "Chocolate cake with cherry filling and whipped cream.",
+        description: "Experience the allure of the Black Forest with our indulgent black forest cake, featuring layers of rich chocolate cake, tart cherry filling, and fluffy whipped cream. A decadent delight.",
+    },
+    { 
+        image: "https://i.imgur.com/YarQpmK.jpg", 
+        title: "Coffee Cake", 
+        price: 20, 
+        category: "Coffee Cake", 
+        flavor: "Moist cake with espresso flavor and coffee-infused frosting.",
+        description: "Awaken your senses with our aromatic coffee cake, infused with espresso flavor and topped with a rich coffee-infused frosting. Perfect for coffee lovers.",
+    },
+    { 
+        image: "https://i.imgur.com/dNHkqZw.jpg", 
+        title: "Banana Cake", 
+        price: 22, 
+        category: "Banana Cake", 
+        flavor: "Moist cake with ripe banana flavor and creamy frosting.",
+        description: "Delight in the sweetness of our banana cake, made with ripe bananas and topped with a creamy frosting. A comforting treat for any time of day.",
+    },
+    { 
+        image: "https://i.imgur.com/GsC9AQD.jpg", 
+        title: "Pineapple Upside-Down Cake", 
+        price: 25, 
+        category: "Pineapple Upside-Down Cake", 
+        flavor: "Buttery cake with caramelized pineapple and cherry topping.",
+        description: "Transport yourself to the tropics with our pineapple upside-down cake, featuring a moist buttery cake, caramelized pineapple slices, and a cherry topping. A taste of paradise in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/DaE4rDP.jpg", 
+        title: "Hazelnut Cake", 
+        price: 27, 
+        category: "Hazelnut Cake", 
+        flavor: "Nutty cake with hazelnut praline filling and chocolate ganache.",
+        description: "Indulge in the richness of our hazelnut cake, featuring a nutty cake base, luscious hazelnut praline filling, and decadent chocolate ganache. A luxurious treat for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/CSuF94H.jpg", 
+        title: "Tiramisu Cake", 
+        price: 28, 
+        category: "Tiramisu Cake", 
+        flavor: "Coffee-soaked cake layers with mascarpone cream filling.",
+        description: "Experience the classic flavors of Italy with our tiramisu cake, featuring coffee-soaked cake layers, creamy mascarpone filling, and a dusting of cocoa powder. A sophisticated dessert for any gathering.",
+    },
+    { 
+        image: "https://i.imgur.com/DOFZ0Vm.jpg", 
+        title: "Salted Caramel Cake", 
+        price: 26, 
+        category: "Salted Caramel Cake", 
+        flavor: "Rich cake layers with salted caramel filling and buttercream frosting.",
+        description: "Indulge in the perfect balance of sweet and salty with our salted caramel cake, featuring rich cake layers, luscious salted caramel filling, and smooth buttercream frosting. A heavenly treat for caramel lovers.",
+    },
+    { 
+        image: "https://i.imgur.com/fd6ujpm.jpg", 
+        title: "Almond Joy Cake", 
+        price: 30, 
+        category: "Almond Joy Cake", 
+        flavor: "Coconut cake with almond filling, chocolate ganache, and toasted coconut.",
+        description: "Escape to the tropics with our Almond Joy cake, featuring coconut-infused cake layers, luscious almond filling, decadent chocolate ganache, and toasted coconut topping. A taste of paradise in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/jo5QfSC.jpg", 
+        title: "Raspberry Lemon Cake", 
+        price: 29, 
+        category: "Raspberry Lemon Cake", 
+        flavor: "Lemon cake with raspberry filling and lemon buttercream frosting.",
+        description: "Delight in the perfect pairing of sweet and tangy with our raspberry lemon cake, featuring moist lemon cake layers, tart raspberry filling, and creamy lemon buttercream frosting. A refreshing treat for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/TWz3xVS.jpg", 
+        title: "Chocolate Peanut Butter Cake", 
+        price: 31, 
+        category: "Chocolate Peanut Butter Cake", 
+        flavor: "Chocolate cake with peanut butter filling and chocolate ganache.",
+        description: "Satisfy your cravings with our indulgent chocolate peanut butter cake, featuring rich chocolate cake layers, creamy peanut butter filling, and decadent chocolate ganache. A match made in dessert heaven.",
+    },
+    { 
+        image: "https://i.imgur.com/Kv5GdwH.jpg", 
+        title: "Coconut Lime Cake", 
+        price: 27, 
+        category: "Coconut Lime Cake", 
+        flavor: "Coconut-lime cake with lime curd filling and coconut buttercream frosting.",
+        description: "Escape to the tropics with our coconut lime cake, featuring tangy lime-infused cake layers, zesty lime curd filling, and creamy coconut buttercream frosting. A taste of paradise in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/sf1OUnU.jpg", 
+        title: "Pistachio Rose Cake", 
+        price: 30, 
+        category: "Pistachio Rose Cake", 
+        flavor: "Pistachio cake with rosewater buttercream and pistachio crumble.",
+        description: "Indulge in the exotic flavors of our pistachio rose cake, featuring pistachio-infused cake layers, fragrant rosewater buttercream, and crunchy pistachio crumble. A luxurious treat for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/NrbZVPI.jpg", 
+        title: "Maple Pecan Cake", 
+        price: 32, 
+        category: "Maple Pecan Cake", 
+        flavor: "Maple cake with pecan praline filling and maple buttercream frosting.",
+        description: "Experience the warmth of autumn with our maple pecan cake, featuring maple-infused cake layers, crunchy pecan praline filling, and smooth maple buttercream frosting. A comforting treat for any gathering.",
+    },
+    { 
+        image: "https://i.imgur.com/pJcvITt.jpg", 
+        title: "Cappuccino Toffee Cake", 
+        price: 28, 
+        category: "Cappuccino Toffee Cake", 
+        flavor: "Coffee cake with toffee bits, coffee buttercream, and chocolate ganache.",
+        description: "Indulge in the rich flavors of our cappuccino toffee cake, featuring coffee-infused cake layers, crunchy toffee bits, creamy coffee buttercream, and decadent chocolate ganache. A coffee lover's dream dessert.",
+    },
+    { 
+        image: "https://i.imgur.com/W0ovAYP.jpg", 
+        title: "Marble Cake", 
+        price: 25, 
+        category: "Marble Cake", 
+        flavor: "Swirled vanilla and chocolate cake with chocolate ganache.",
+        description: "Enjoy the best of both worlds with our marble cake, featuring swirled vanilla and chocolate cake layers and a decadent chocolate ganache. A timeless classic for any celebration.",
+    },
+    { 
+        image: "https://i.imgur.com/U6wFbsC.jpg", 
+        title: "Mango Coconut Cake", 
+        price: 29, 
+        category: "Mango Coconut Cake", 
+        flavor: "Mango cake with coconut cream filling and mango buttercream.",
+        description: "Transport yourself to the tropics with our mango coconut cake, featuring tropical mango-infused cake layers, luscious coconut cream filling, and creamy mango buttercream. A taste of paradise in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/l9sdiWb.jpg", 
+        title: "Cherry Almond Cake", 
+        price: 26, 
+        category: "Cherry Almond Cake", 
+        flavor: "Almond cake with cherry filling and almond buttercream.",
+        description: "Delight in the perfect pairing of almond and cherry with our cherry almond cake, featuring almond-infused cake layers, tart cherry filling, and smooth almond buttercream. A classic combination for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/H1H61SZ.jpg", 
+        title: "Lavender Honey Cake", 
+        price: 30, 
+        category: "Lavender Honey Cake", 
+        flavor: "Lavender-infused cake with honey cream cheese frosting.",
+        description: "Relax and unwind with our lavender honey cake, featuring delicate lavender-infused cake layers and creamy honey cream cheese frosting. A soothing treat for any time of day.",
+    },
+    { 
+        image: "https://i.imgur.com/THZx7DO.jpg", 
+        title: "Matcha Green Tea Cake", 
+        price: 31, 
+        category: "Matcha Green Tea Cake", 
+        flavor: "Matcha-infused cake with matcha buttercream and red bean filling.",
+        description: "Elevate your dessert experience with our matcha green tea cake, featuring earthy matcha-infused cake layers, creamy matcha buttercream, and sweet red bean filling. A unique and indulgent treat for matcha enthusiasts.",
+    },
+    { 
+        image: "https://i.imgur.com/1YlqRC9.jpg", 
+        title: "Blueberry Lemon Cake", 
+        price: 28, 
+        category: "Blueberry Lemon Cake", 
+        flavor: "Lemon cake with blueberry compote and lemon buttercream.",
+        description: "Brighten your day with our blueberry lemon cake, featuring tangy lemon-infused cake layers, sweet blueberry compote, and creamy lemon buttercream. A refreshing and delightful treat for any occasion.",
+    },
+    { 
+        image: "https://i.imgur.com/pGZs4Xv.jpg", 
+        title: "Orange Creamsicle Cake", 
+        price: 27, 
+        category: "Orange Creamsicle Cake", 
+        flavor: "Orange cake with vanilla-orange frosting and orange zest.",
+        description: "Indulge in nostalgia with our orange creamsicle cake, featuring citrusy orange cake layers, creamy vanilla-orange frosting, and zesty orange zest. A childhood favorite reimagined for your enjoyment.",
+    },
+    { 
+        image: "https://i.imgur.com/4FvZs1R.jpg", 
+        title: "Chocolate Mint Cake", 
+        price: 29, 
+        category: "Chocolate Mint Cake", 
+        flavor: "Chocolate cake with mint buttercream and chocolate ganache.",
+        description: "Refresh your palate with our chocolate mint cake, featuring rich chocolate cake layers, cool mint buttercream, and decadent chocolate ganache. A classic combination for chocolate and mint lovers.",
+    },
+];
+
+
+    // Function to generate HTML for each cookie listing
+    function generateCookieCard(listing) {
+        return `
+        <div class="col listing-card">
+            <div class="card">
+                <img src="${listing.image}" class="card-img-top" alt="Cookie Image" style="height: 20rem;">
+                <div class="card-body">
+                    <b>${listing.title}</b><br>
+                    &#8377;${listing.price.toFixed(2)} /- <br>
+                    Category - ${listing.category} <br>
+                    Flavor - ${listing.flavor}
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // Function to populate the gallery with cookie listings
+    function populateGallery() {
+        const galleryElement = document.getElementById("cookieGallery");
+        let galleryHTML = "";
+        allListings.forEach(listing => {
+            galleryHTML += generateCookieCard(listing);
+        });
+        galleryElement.innerHTML = galleryHTML;
+    }
+
+    // Populate the gallery when the page loads
+    window.onload = populateGallery;
+</script>

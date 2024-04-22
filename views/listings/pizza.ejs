@@ -1,0 +1,79 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="pizzaGallery">
+        <!-- Cards will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-GLhlTQ6ZVgY6JSg9eXYYt+TU6P+R9SNzN8uGZB5LMVMyRx2vVuUv5SPT8VFuK5oV"
+    crossorigin="anonymous"></script>
+
+<script>
+    // Array of pizza listings
+    const allListings = [
+        {
+            name: "Margherita Pizza",
+            category: "Vegetarian",
+            flavor: "Classic margherita flavor",
+            description: "Enjoy a classic margherita pizza made with fresh tomatoes, mozzarella cheese, and basil for a traditional Italian taste.",
+            price: "8.99",
+            image: "https://i.imgur.com/xyz.jpg"
+        },
+        {
+            name: "Pepperoni Pizza",
+            category: "Non-Vegetarian",
+            flavor: "Spicy pepperoni flavor",
+            description: "Indulge in the spicy and savory taste of pepperoni pizza with mozzarella cheese and zesty pepperoni slices.",
+            price: "9.99",
+            image: "https://i.imgur.com/abc.jpg"
+        },
+        {
+            name: "BBQ Chicken Pizza",
+            category: "Non-Vegetarian",
+            flavor: "Smoky BBQ chicken flavor",
+            description: "Experience the smoky and savory taste of BBQ chicken pizza with seasoned chicken, BBQ sauce, and mozzarella cheese.",
+            price: "10.49",
+            image: "https://i.imgur.com/def.jpg"
+        },
+        // Additional pizza listings...
+    ];
+
+    // Function to generate HTML for each pizza listing
+    function generatePizzaCard(listing) {
+        return `
+            <div class="col listing-card">
+                <div class="card">
+                    <img src="${listing.image}" class="card-img-top" alt="${listing.name} Image" style="height: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${listing.name}</h5>
+                        <p class="card-text">&#8377;${listing.price}</p>
+                        <p class="card-text">Category: ${listing.category}</p>
+                        <p class="card-text">Flavor: ${listing.flavor}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to populate the gallery with pizza listings
+    function populateGallery() {
+        const galleryElement = document.getElementById("pizzaGallery");
+        let galleryHTML = "";
+        allListings.forEach(listing => {
+            galleryHTML += generatePizzaCard(listing);
+        });
+        galleryElement.innerHTML = galleryHTML;
+    }
+
+    // Populate the gallery when the page loads
+    window.onload = populateGallery;
+</script>

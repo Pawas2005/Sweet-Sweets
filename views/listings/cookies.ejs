@@ -1,0 +1,289 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+
+<body>
+<div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="cookieGallery">
+        <!-- Images will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+<script>
+    // Array of cookie listings
+    const allListings = [
+        { 
+            image: "data:image/jpeg;base64,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", 
+            title: "Chocolate Chip Cookie", 
+            price: 2, 
+            category: "Chocolate Chip", 
+            flavor: "Classic"
+        },
+        { 
+            image: "data:image/jpeg;base64,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", 
+            title: "Oatmeal Raisin Cookie", 
+            price: 2.5, 
+            category: "Oatmeal Raisin", 
+            flavor: "Traditional"
+        },
+        { 
+            image: "https://i.imgur.com/5cGRsIR.jpg", 
+            title: "Sugar Cookie", 
+            price: 1.5, 
+            category: "Sugar", 
+            flavor: "Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/vXU0gFp.jpg", 
+            title: "Peanut Butter Cookie", 
+            price: 2, 
+            category: "Peanut Butter", 
+            flavor: "Nutty"
+        },
+        { 
+            image: "https://i.imgur.com/qnRPo9O.jpg", 
+            title: "Snickerdoodle Cookie", 
+            price: 2, 
+            category: "Snickerdoodle", 
+            flavor: "Cinnamon"
+        },
+        { 
+            image: "https://i.imgur.com/0Z7kTJu.jpg", 
+            title: "Macadamia Nut Cookie", 
+            price: 3, 
+            category: "Macadamia Nut", 
+            flavor: "Buttery"
+        },
+        { 
+            image: "https://i.imgur.com/QNz8C9T.jpg", 
+            title: "White Chocolate Macadamia Nut Cookie", 
+            price: 3.5, 
+            category: "White Chocolate Macadamia Nut", 
+            flavor: "Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/ZyX6sLy.jpg", 
+            title: "Double Chocolate Chip Cookie", 
+            price: 2.5, 
+            category: "Chocolate Chip", 
+            flavor: "Rich"
+        },
+        { 
+            image: "https://i.imgur.com/YarQpmK.jpg", 
+            title: "Gingerbread Cookie", 
+            price: 2, 
+            category: "Gingerbread", 
+            flavor: "Spicy"
+        },
+        { 
+            image: "https://i.imgur.com/dNHkqZw.jpg", 
+            title: "Shortbread Cookie", 
+            price: 2, 
+            category: "Shortbread", 
+            flavor: "Buttery"
+        },
+        { 
+            image: "https://i.imgur.com/GsC9AQD.jpg", 
+            title: "Almond Cookie", 
+            price: 2.5, 
+            category: "Almond", 
+            flavor: "Nutty"
+        },
+        { 
+            image: "https://i.imgur.com/DaE4rDP.jpg", 
+            title: "Coconut Macaroon", 
+            price: 2, 
+            category: "Coconut", 
+            flavor: "Coconutty"
+        },
+        { 
+            image: "https://i.imgur.com/DxRiGqg.jpg", 
+            title: "Lemon Cookie", 
+            price: 2, 
+            category: "Lemon", 
+            flavor: "Zesty"
+        },
+        { 
+            image: "https://i.imgur.com/7Ri8Vtg.jpg", 
+            title: "Pumpkin Cookie", 
+            price: 2.5, 
+            category: "Pumpkin", 
+            flavor: "Seasonal"
+        },
+        { 
+            image: "https://i.imgur.com/vaTezrJ.jpg", 
+            title: "Red Velvet Cookie", 
+            price: 3, 
+            category: "Red Velvet", 
+            flavor: "Velvety"
+        },
+        { 
+            image: "https://i.imgur.com/ZiHnwM4.jpg", 
+            title: "M&M Cookie", 
+            price: 2.5, 
+            category: "M&M", 
+            flavor: "Colorful"
+        },
+        { 
+            image: "https://i.imgur.com/ohrLfWP.jpg", 
+            title: "Chocolate Crinkle Cookie", 
+            price: 2.5, 
+            category: "Chocolate Crinkle", 
+            flavor: "Fudgy"
+        },
+        { 
+            image: "https://i.imgur.com/FWb1ZyL.jpg", 
+            title: "Cranberry White Chocolate Cookie", 
+            price: 3, 
+            category: "Cranberry White Chocolate", 
+            flavor: "Tart and Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/yFXkzA4.jpg", 
+            title: "Butterscotch Cookie", 
+            price: 2, 
+            category: "Butterscotch", 
+            flavor: "Buttery Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/35PLTUD.jpg", 
+            title: "Pistachio Cookie", 
+            price: 3, 
+            category: "Pistachio", 
+            flavor: "Nutty"
+        },
+        { 
+            image: "https://i.imgur.com/voFziRj.jpg", 
+            title: "Raspberry Linzer Cookie", 
+            price: 3.5, 
+            category: "Raspberry Linzer", 
+            flavor: "Tangy"
+        },
+        { 
+            image: "https://i.imgur.com/kl2qlxJ.jpg", 
+            title: "S'mores Cookie", 
+            price: 3, 
+            category: "S'mores", 
+            flavor: "Marshmallowy"
+        },
+        { 
+            image: "https://i.imgur.com/Kv5GdwH.jpg", 
+            title: "Chewy Chocolate Cookie", 
+            price: 2.5, 
+            category: "Chocolate", 
+            flavor: "Chewy"
+        },
+        { 
+            image: "https://i.imgur.com/Kc0GNgx.jpg", 
+            title: "Cinnamon Roll Cookie", 
+            price: 3, 
+            category: "Cinnamon Roll", 
+            flavor: "Cinnamon-y"
+        },
+        { 
+            image: "https://i.imgur.com/fd6ujpm.jpg", 
+            title: "Hazelnut Cookie", 
+            price: 3, 
+            category: "Hazelnut", 
+            flavor: "Nutty"
+        },
+        { 
+            image: "https://i.imgur.com/JB8V5W1.jpg", 
+            title: "Peanut Butter Chocolate Chip Cookie", 
+            price: 3, 
+            category: "Peanut Butter Chocolate Chip", 
+            flavor: "Nutty and Chocolatey"
+        },
+        { 
+            image: "https://i.imgur.com/TWz3xVS.jpg", 
+            title: "Almond Joy Cookie", 
+            price: 3.5, 
+            category: "Almond Joy", 
+            flavor: "Coconut and Chocolate"
+        },
+        { 
+            image: "https://i.imgur.com/jo5QfSC.jpg", 
+            title: "Caramel Pecan Cookie", 
+            price: 3.5, 
+            category: "Caramel Pecan", 
+            flavor: "Caramel and Nutty"
+        },
+        { 
+            image: "https://i.imgur.com/CSuF94H.jpg", 
+            title: "Salted Caramel Chocolate Chip Cookie", 
+            price: 3.5, 
+            category: "Salted Caramel Chocolate Chip", 
+            flavor: "Sweet and Salty"
+        },
+        { 
+            image: "https://i.imgur.com/DOFZ0Vm.jpg", 
+            title: "Coconut Lime Cookie", 
+            price: 3, 
+            category: "Coconut Lime", 
+            flavor: "Tropical"
+        },
+        { 
+            image: "https://i.imgur.com/sf1OUnU.jpg", 
+            title: "Pecan Pie Cookie", 
+            price: 3.5, 
+            category: "Pecan Pie", 
+            flavor: "Nutty and Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/NrbZVPI.jpg", 
+            title: "Maple Bacon Cookie", 
+            price: 3.5, 
+            category: "Maple Bacon", 
+            flavor: "Savory and Sweet"
+        },
+        { 
+            image: "https://i.imgur.com/pJcvITt.jpg", 
+            title: "Cappuccino Cookie", 
+            price: 3, 
+            category: "Cappuccino", 
+            flavor: "Coffee-flavored"
+        },
+        // Add more listings here...
+    ];
+
+    // Function to generate HTML for each cookie listing
+    function generateCookieCard(listing) {
+        return `
+        <div class="col listing-card">
+            <div class="card">
+                <img src="${listing.image}" class="card-img-top" alt="Cookie Image" style="height: 20rem;">
+                <div class="card-body">
+                    <b>${listing.title}</b><br>
+                    &#8377;${listing.price.toFixed(2)} /- <br>
+                    Category - ${listing.category} <br>
+                    Flavor - ${listing.flavor}
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // Function to populate the gallery with cookie listings
+    function populateGallery() {
+        const galleryElement = document.getElementById("cookieGallery");
+        let galleryHTML = "";
+        allListings.forEach(listing => {
+            galleryHTML += generateCookieCard(listing);
+        });
+        galleryElement.innerHTML = galleryHTML;
+    }
+
+    // Populate the gallery when the page loads
+    window.onload = populateGallery;
+</script>

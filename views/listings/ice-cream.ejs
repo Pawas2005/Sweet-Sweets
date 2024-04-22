@@ -1,0 +1,251 @@
+<% layout("/layouts/boilerplate") %>
+
+
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+
+<body>
+<div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="cookieGallery">
+        <!-- Images will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+<script>
+    // Array of cookie listings
+// Array of ice cream listings
+const allListings = [
+    { 
+        image: "https://i.imgur.com/5Zc7Nxo.jpg", 
+        title: "Vanilla Ice Cream", 
+        price: 4, 
+        category: "Classic Flavors", 
+        flavor: "Smooth and creamy vanilla flavor.",
+        description: "Indulge in the timeless classic with our rich and creamy vanilla ice cream. Made with real vanilla beans for an authentic taste.",
+    },
+    { 
+        image: "https://i.imgur.com/NQwDqz8.jpg", 
+        title: "Chocolate Ice Cream", 
+        price: 4.5, 
+        category: "Classic Flavors", 
+        flavor: "Rich and decadent chocolate flavor.",
+        description: "Satisfy your chocolate cravings with our luscious chocolate ice cream. Made with premium cocoa for a truly indulgent experience.",
+    },
+    { 
+        image: "https://i.imgur.com/5LK26Hs.jpg", 
+        title: "Strawberry Ice Cream", 
+        price: 5, 
+        category: "Classic Flavors", 
+        flavor: "Sweet and fruity strawberry flavor.",
+        description: "Experience the taste of summer with our refreshing strawberry ice cream. Packed with real strawberries for a burst of fruity goodness.",
+    },
+    { 
+        image: "https://i.imgur.com/WyzMPA0.jpg", 
+        title: "Mint Chocolate Chip Ice Cream", 
+        price: 5.5, 
+        category: "Classic Flavors", 
+        flavor: "Cool mint flavor with chocolate chips.",
+        description: "Refresh your palate with our cool and creamy mint chocolate chip ice cream. Made with fresh mint leaves and generous chunks of chocolate.",
+    },
+    { 
+        image: "https://i.imgur.com/hqDv0Pz.jpg", 
+        title: "Cookies and Cream Ice Cream", 
+        price: 5.5, 
+        category: "Classic Flavors", 
+        flavor: "Vanilla ice cream with chocolate cookie pieces.",
+        description: "Indulge in the classic combination of cookies and cream with our creamy vanilla ice cream studded with chunks of chocolate cookies.",
+    },
+    { 
+        image: "https://i.imgur.com/MaN1LZH.jpg", 
+        title: "Rocky Road Ice Cream", 
+        price: 6, 
+        category: "Classic Flavors", 
+        flavor: "Chocolate ice cream with marshmallows and nuts.",
+        description: "Take a trip down the rocky road with our rich chocolate ice cream loaded with gooey marshmallows and crunchy nuts.",
+    },
+    { 
+        image: "https://i.imgur.com/Fs67KNS.jpg", 
+        title: "Pistachio Ice Cream", 
+        price: 5.5, 
+        category: "Nutty Flavors", 
+        flavor: "Creamy pistachio flavor with chopped nuts.",
+        description: "Savor the nutty goodness of our pistachio ice cream made with real pistachios and crunchy chopped nuts.",
+    },
+    { 
+        image: "https://i.imgur.com/2YdB8fV.jpg", 
+        title: "Almond Fudge Ice Cream", 
+        price: 6, 
+        category: "Nutty Flavors", 
+        flavor: "Creamy almond ice cream with fudge swirls.",
+        description: "Indulge in the rich and creamy goodness of our almond fudge ice cream featuring swirls of decadent fudge throughout.",
+    },
+    { 
+        image: "https://i.imgur.com/m8FZZff.jpg", 
+        title: "Hazelnut Praline Ice Cream", 
+        price: 6.5, 
+        category: "Nutty Flavors", 
+        flavor: "Hazelnut ice cream with caramelized praline pieces.",
+        description: "Experience the luxurious taste of our hazelnut praline ice cream loaded with caramelized hazelnut praline pieces for a delightful crunch.",
+    },
+    { 
+        image: "https://i.imgur.com/Zh5PwC8.jpg", 
+        title: "Maple Walnut Ice Cream", 
+        price: 6, 
+        category: "Nutty Flavors", 
+        flavor: "Rich maple ice cream with crunchy walnuts.",
+        description: "Enjoy the warmth of maple syrup in our maple walnut ice cream complemented by crunchy walnut pieces for a satisfying texture.",
+    },
+    { 
+        image: "https://i.imgur.com/VO2Ln5M.jpg", 
+        title: "Coconut Pineapple Ice Cream", 
+        price: 5.5, 
+        category: "Tropical Flavors", 
+        flavor: "Creamy coconut ice cream with pineapple chunks.",
+        description: "Escape to the tropics with our coconut pineapple ice cream featuring creamy coconut ice cream swirled with juicy pineapple pieces.",
+    },
+    { 
+        image: "https://i.imgur.com/V3cH7rs.jpg", 
+        title: "Mango Sorbet", 
+        price: 5, 
+        category: "Tropical Flavors", 
+        flavor: "Refreshing mango flavor with a smooth texture.",
+        description: "Cool down with our refreshing mango sorbet made with ripe mangoes for a burst of tropical flavor in every spoonful.",
+    },
+    { 
+        image: "https://i.imgur.com/c4TDr5O.jpg", 
+        title: "Passion Fruit Sorbet", 
+        price: 5, 
+        category: "Tropical Flavors", 
+        flavor: "Tangy passion fruit flavor with a vibrant color.",
+        description: "Awaken your taste buds with our tangy passion fruit sorbet featuring the bold flavor of ripe passion fruit in every bite.",
+    },
+    { 
+        image: "https://i.imgur.com/5HsZhov.jpg", 
+        title: "Lemon Sorbet", 
+        price: 4.5, 
+        category: "Citrus Flavors", 
+        flavor: "Refreshing lemon flavor with a zesty kick.",
+        description: "Refresh your palate with our zesty lemon sorbet made with freshly squeezed lemons for a burst of citrusy goodness.",
+    },
+    { 
+        image: "https://i.imgur.com/4B6npl4.jpg", 
+        title: "Orange Creamsicle Ice Cream", 
+        price: 5.5, 
+        category: "Citrus Flavors", 
+        flavor: "Creamy orange ice cream with vanilla swirls.",
+        description: "Indulge in nostalgia with our creamy orange creamsicle ice cream featuring the classic combination of citrusy orange and sweet vanilla.",
+    },
+    { 
+        image: "https://i.imgur.com/O2UDvQz.jpg", 
+        title: "Raspberry Ripple Ice Cream", 
+        price: 5.5, 
+        category: "Berry Flavors", 
+        flavor: "Smooth vanilla ice cream with swirls of raspberry sauce.",
+        description: "Satisfy your sweet tooth with our creamy vanilla ice cream swirled with tart raspberry sauce for a delightful contrast of flavors.",
+    },
+    { 
+        image: "https://i.imgur.com/td1gg1d.jpg", 
+        title: "Blueberry Cheesecake Ice Cream", 
+        price: 6, 
+        category: "Berry Flavors", 
+        flavor: "Creamy cheesecake ice cream with blueberry swirls and graham cracker pieces.",
+        description: "Indulge in the decadent taste of our blueberry cheesecake ice cream featuring creamy cheesecake ice cream swirled with sweet blueberry sauce and crunchy graham cracker pieces.",
+    },
+    { 
+        image: "https://i.imgur.com/Wotwg2z.jpg", 
+        title: "Mixed Berry Sorbet", 
+        price: 5, 
+        category: "Berry Flavors", 
+        flavor: "Refreshing blend of mixed berries with a smooth texture.",
+        description: "Enjoy the vibrant flavors of summer with our mixed berry sorbet made with a medley of ripe berries for a burst of sweetness in every spoonful.",
+    },
+    { 
+        image: "https://i.imgur.com/SgOM7NW.jpg", 
+        title: "Black Forest Ice Cream", 
+        price: 6.5, 
+        category: "Specialty Flavors", 
+        flavor: "Chocolate ice cream with cherries and chocolate chunks.",
+        description: "Indulge in the decadent flavors of our black forest ice cream featuring rich chocolate ice cream studded with juicy cherries and chunks of dark chocolate.",
+    },
+    { 
+        image: "https://i.imgur.com/5s5kOYd.jpg", 
+        title: "Tiramisu Ice Cream", 
+        price: 7, 
+        category: "Specialty Flavors", 
+        flavor: "Coffee ice cream with chocolate flakes and ladyfinger pieces.",
+        description: "Experience the classic flavors of tiramisu in our indulgent tiramisu ice cream featuring coffee-infused ice cream swirled with chocolate flakes and pieces of ladyfinger cake.",
+    },
+    { 
+        image: "https://i.imgur.com/8x9kO0P.jpg", 
+        title: "Salted Caramel Ice Cream", 
+        price: 6, 
+        category: "Specialty Flavors", 
+        flavor: "Creamy caramel ice cream with sea salt caramel swirls.",
+        description: "Satisfy your sweet and salty cravings with our creamy salted caramel ice cream featuring ribbons of luscious sea salt caramel swirls throughout.",
+    },
+    { 
+        image: "https://i.imgur.com/3aWzYRM.jpg", 
+        title: "Cookie Dough Ice Cream", 
+        price: 6, 
+        category: "Specialty Flavors", 
+        flavor: "Vanilla ice cream with chunks of cookie dough.",
+        description: "Indulge in the classic combination of cookie dough and ice cream with our creamy vanilla ice cream loaded with chunks of cookie dough for a delightful treat.",
+    },
+    { 
+        image: "https://i.imgur.com/LOfF2tJ.jpg", 
+        title: "S'mores Ice Cream", 
+        price: 7, 
+        category: "Specialty Flavors", 
+        flavor: "Toasted marshmallow ice cream with graham cracker pieces and chocolate chunks.",
+        description: "Experience the nostalgia of a campfire treat with our s'mores ice cream featuring creamy toasted marshmallow ice cream swirled with crunchy graham cracker pieces and chunks of rich chocolate.",
+    },
+    { 
+        image: "https://i.imgur.com/93DWz89.jpg", 
+        title: "Cotton Candy Ice Cream", 
+        price: 5.5, 
+        category: "Specialty Flavors", 
+        flavor: "Sweet and fluffy cotton candy flavor.",
+        description: "Transport yourself to the carnival with our whimsical cotton candy ice cream featuring the sweet and fluffy taste of spun sugar in every scoop.",
+    },
+];
+
+
+    // Function to generate HTML for each cookie listing
+    function generateCookieCard(listing) {
+        return `
+        <div class="col listing-card">
+            <div class="card">
+                <img src="${listing.image}" class="card-img-top" alt="Cookie Image" style="height: 20rem;">
+                <div class="card-body">
+                    <b>${listing.title}</b><br>
+                    &#8377;${listing.price.toFixed(2)} /- <br>
+                    Category - ${listing.category} <br>
+                    Flavor - ${listing.flavor}
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // Function to populate the gallery with cookie listings
+    function populateGallery() {
+        const galleryElement = document.getElementById("cookieGallery");
+        let galleryHTML = "";
+        allListings.forEach(listing => {
+            galleryHTML += generateCookieCard(listing);
+        });
+        galleryElement.innerHTML = galleryHTML;
+    }
+
+    // Populate the gallery when the page loads
+    window.onload = populateGallery;
+</script>

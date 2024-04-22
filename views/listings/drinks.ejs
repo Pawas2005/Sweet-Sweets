@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="drinkGallery">
+        <!-- Cards will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-GLhlTQ6ZVgY6JSg9eXYYt+TU6P+R9SNzN8uGZB5LMVMyRx2vVuUv5SPT8VFuK5oV"
+    crossorigin="anonymous"></script>
+
+<script>
+    // Array of drink listings
+    const allListings = [
+        {
+            name: "Chocolate Milkshake",
+            category: "Milkshake",
+            flavor: "Rich chocolate flavor",
+            description: "Indulge in the rich and creamy taste of a chocolate milkshake, made with high-quality cocoa and blended with milk for a smooth and satisfying treat.",
+            price: "4.99",
+            image: "https://i.imgur.com/yTduCKH.jpg"
+        },
+        {
+            name: "Vanilla Milkshake",
+            category: "Milkshake",
+            flavor: "Classic vanilla taste",
+            description: "Enjoy the timeless flavor of vanilla with our vanilla milkshake, made with high-quality vanilla extract and blended with milk for a smooth and satisfying treat.",
+            price: "4.99",
+            image: "https://i.imgur.com/Gx0Xq8b.jpg"
+        },
+        // Other drink listings...
+    ];
+
+    // Function to generate HTML for each drink listing
+    function generateDrinkCard(listing) {
+        return `
+            <div class="col listing-card">
+                <div class="card">
+                    <img src="${listing.image}" class="card-img-top" alt="${listing.name} Image" style="height: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${listing.name}</h5>
+                        <p class="card-text">&#8377;${listing.price}</p>
+                        <p class="card-text">Category: ${listing.category}</p>
+                        <p class="card-text">Flavor: ${listing.flavor}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Function to populate the gallery with drink listings
+    function populateGallery() {
+        const galleryElement = document.getElementById("drinkGallery");
+        let galleryHTML = "";
+        allListings.forEach(listing => {
+            galleryHTML += generateDrinkCard(listing);
+        });
+        galleryElement.innerHTML = galleryHTML;
+    }
+
+    // Populate the gallery when the page loads
+    window.onload = populateGallery;
+</script>
